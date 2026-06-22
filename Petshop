@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetShop - Productos para tu mejor amigo</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --verde-pet: #27ae60;
+            --verde-oscuro: #1e8449;
+            --azul-footer: #2c3e50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        /* Encabezado con imagen de fondo y degradado */
+        .header-custom {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&q=80&w=1500') center/cover;
+            color: white;
+            padding: 80px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .navbar {
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Efecto de elevación al pasar el mouse por las tarjetas */
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .btn-success {
+            background-color: var(--verde-pet);
+            border: none;
+        }
+
+        .lista-especies {
+            font-size: 0.9rem;
+            background-color: #f1f8f4;
+            border-radius: 8px;
+        }
+
+        /* Media Query para diseño responsivo en celulares */
+        @media (max-width: 768px) {
+            .header-custom h1 {
+                font-size: 2rem;
+            }
+            .aside-promos {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-custom text-center">
+        <div class="container">
+            <h1 class="display-3 fw-bold">🐶 Productos para tu Mejor Amigo 🐱</h1>
+            <p class="lead">Calidad y amor para quienes más quieres.</p>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: var(--verde-oscuro);">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">🐾 PetShop</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menuPrincipal">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link fw-semibold text-white" href="#inicio">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold text-white" href="#nosotros">Quiénes Somos</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold text-white" href="#productos">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold text-white" href="#ubicacion">Ubicación</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold text-white" href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+
+        <section id="inicio" class="row mb-5 align-items-center">
+            <div class="col-lg-8">
+                <div class="p-5 bg-white rounded-4 shadow-sm">
+                    <h2 class="text-success mb-4">🏠 Bienvenidos a la Familia</h2>
+                    <p class="fs-5 text-muted">En nuestra tienda, no solo vendemos productos, brindamos bienestar. Encuentra lo mejor para perros, gatos, conejos y más especies domésticas con la confianza que buscas.</p>
+                    <a href="#productos" class="btn btn-success btn-lg px-4 shadow">Explorar Tienda</a>
+                </div>
+            </div>
+            <aside class="col-lg-4 aside-promos">
+                <div class="card bg-warning text-dark p-4 border-0">
+                    <h4 class="fw-bold">⚡ ¡Promoción!</h4>
+                    <p class="m-0">2x1 en juguetes interactivos este fin de semana. 🚚 Envíos gratis por compras mayores a $30.</p>
+                </div>
+            </aside>
+        </section>
+
+        <section id="nosotros" class="mb-5">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 order-2 order-md-1">
+                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=600" class="img-fluid rounded-5 shadow" alt="Sobre nosotros">
+                </div>
+                <div class="col-md-6 order-1 order-md-2">
+                    <h2 class="text-success border-start border-4 border-success ps-3">🐾 Quiénes Somos</h2>
+                    <p class="mt-4 fs-5">Somos un equipo de amantes de los animales dedicados a seleccionar los mejores suministros del mercado. Entendemos que tu mascota es parte esencial de tu vida, y por eso solo ofrecemos productos que nosotros mismos usaríamos.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="productos" class="mb-5">
+            <h2 class="text-center text-success mb-5 fw-bold">🦴 Nuestro Catálogo</h2>
+            
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+                
+                <div class="col">
+                    <article class="card h-100">
+                        <img src="https://cdn.shopify.com/s/files/1/0102/3742/files/Ganador_936ee4de-362b-4b41-894f-0fbad4ba9e04.jpg?v=1611158640" class="card-img-top p-2 rounded-4" alt="Alimento" style="height: 200px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold">🍖 Alimento Premium</h5>
+                            <button class="btn btn-outline-success btn-sm mt-2" data-bs-toggle="collapse" data-bs-target="#listaAlimento">Ver variedades</button>
+                            
+                            <div class="collapse mt-3" id="listaAlimento">
+                                <ul class="list-group lista-especies shadow-sm">
+                                    <li class="list-group-item bg-transparent">🐶 Perros (Croquetas y Húmedo)</li>
+                                    <li class="list-group-item bg-transparent">🐱 Gatos (Paté y Mix)</li>
+                                    <li class="list-group-item bg-transparent">🐰 Conejos (Heno y Pellets)</li>
+                                    <li class="list-group-item bg-transparent">🐹 Cuyes (Mezcla de granos)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col">
+                    <article class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&q=80&w=400" class="card-img-top p-2 rounded-4" alt="Juguetes" style="height: 200px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold">🎾 Juguetes Interactivos</h5>
+                            <button class="btn btn-outline-success btn-sm mt-2" data-bs-toggle="collapse" data-bs-target="#listaJuguetes">Ver variedades</button>
+                            
+                            <div class="collapse mt-3" id="listaJuguetes">
+                                <ul class="list-group lista-especies shadow-sm">
+                                    <li class="list-group-item bg-transparent">🐶 Mordedores y pelotas</li>
+                                    <li class="list-group-item bg-transparent">🐱 Rascadores y plumas</li>
+                                    <li class="list-group-item bg-transparent">🐰 Túneles de madera</li>
+                                    <li class="list-group-item bg-transparent">🐹 Ruedas de ejercicio</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col">
+                    <article class="card h-100">
+                        <img src="https://wedogy.com/wp-content/uploads/2025/04/dog-bed-brands-uk.webp" class="card-img-top p-2 rounded-4" alt="Camas" style="height: 200px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold">🛏️ Camas Cómodas</h5>
+                            <button class="btn btn-outline-success btn-sm mt-2" data-bs-toggle="collapse" data-bs-target="#listaCamas">Ver tamaños</button>
+                            
+                            <div class="collapse mt-3" id="listaCamas">
+                                <ul class="list-group lista-especies shadow-sm">
+                                    <li class="list-group-item bg-transparent">🐶 Camas XL Ortopédicas</li>
+                                    <li class="list-group-item bg-transparent">🐱 Nidos acolchados</li>
+                                    <li class="list-group-item bg-transparent">🐰 Cojines pequeños</li>
+                                    <li class="list-group-item bg-transparent">🐹 Hamacas para cuyes</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col">
+                    <article class="card h-100">
+                        <img src="https://http2.mlstatic.com/D_Q_NP_2X_684768-MLA110080010917_042026-P.webp" class="card-img-top p-2 rounded-4" alt="Collares" style="height: 200px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold">🐕 Collares y Correas</h5>
+                            <button class="btn btn-outline-success btn-sm mt-2" data-bs-toggle="collapse" data-bs-target="#listaCollares">Ver opciones</button>
+                            
+                            <div class="collapse mt-3" id="listaCollares">
+                                <ul class="list-group lista-especies shadow-sm">
+                                    <li class="list-group-item bg-transparent">🐶 Arneses reforzados para perros</li>
+                                    <li class="list-group-item bg-transparent">🐱 Collares con cascabel anti-pérdida</li>
+                                    <li class="list-group-item bg-transparent">🐰 Pecheras ajustables para conejos</li>
+                                    <li class="list-group-item bg-transparent">🐹 Correas ligeras de paseo</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col">
+                    <article class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80&w=400" class="card-img-top p-2 rounded-4" alt="Higiene" style="height: 200px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold">🧼 Higiene y Limpieza</h5>
+                            <button class="btn btn-outline-success btn-sm mt-2" data-bs-toggle="collapse" data-bs-target="#listaHigiene">Ver productos</button>
+                            
+                            <div class="collapse mt-3" id="listaHigiene">
+                                <ul class="list-group lista-especies shadow-sm">
+                                    <li class="list-group-item bg-transparent">🐶 Shampoo antipulgas</li>
+                                    <li class="list-group-item bg-transparent">🐱 Arena sanitaria premium</li>
+                                    <li class="list-group-item bg-transparent">🐰 Sustrato absorbente de viruta</li>
+                                    <li class="list-group-item bg-transparent">🐹 Baños secos para roedores</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col">
+                    <article class="card h-100">
+                        <img src="https://i0.wp.com/snackys.cl/wp-content/uploads/2023/06/image-1.png?fit=1080%2C600&ssl=1" class="card-img-top p-2 rounded-4" alt="Snacks" style="height: 200px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold">🦴 Snacks Saludables</h5>
+                            <button class="btn btn-outline-success btn-sm mt-2" data-bs-toggle="collapse" data-bs-target="#listaSnacks">Ver delicias</button>
+                            
+                            <div class="collapse mt-3" id="listaSnacks">
+                                <ul class="list-group lista-especies shadow-sm">
+                                    <li class="list-group-item bg-transparent">🐶 Galletas de avena y carne</li>
+                                    <li class="list-group-item bg-transparent">🐱 Treats de salmón y catnip</li>
+                                    <li class="list-group-item bg-transparent">🐰 Snacks de manzana deshidratada</li>
+                                    <li class="list-group-item bg-transparent">🐹 Barras de alfalfa y miel</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="ubicacion" class="mb-5">
+            <h2 class="text-success mb-4">📍 Visítanos</h2>
+            <div class="mb-4">
+                <iframe src="https://maps.google.com/maps?q=Ecuador&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="300" style="border:0; border-radius:15px;" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section id="contacto" class="row g-5">
+            <div class="col-md-6">
+                <h2 class="text-success mb-4">📞 Contáctanos</h2>
+                <div class="card p-4 shadow-sm">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Nombre Completo</label>
+                            <input type="text" class="form-control" placeholder="Tu nombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Correo Electrónico</label>
+                            <input type="email" class="form-control" placeholder="nombre@ejemplo.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Asunto</label>
+                            <input type="text" class="form-control" placeholder="Motivo del mensaje" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Mensaje</label>
+                            <textarea class="form-control" rows="3" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Enviar Formulario</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="col-md-6 d-flex flex-column justify-content-center">
+                <h3 class="text-success mb-4 text-center">Nuestras Redes</h3>
+                <div class="d-grid gap-3">
+                    <a href="https://facebook.com" target="_blank" class="btn btn-primary btn-lg shadow">Facebook</a>
+                    <a href="https://instagram.com" target="_blank" class="btn btn-danger btn-lg shadow">Instagram</a>
+                    <a href="https://wa.me/593999999999" target="_blank" class="btn btn-success btn-lg shadow">WhatsApp</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-4 text-white text-center" style="background-color: var(--azul-footer);">
+        <div class="container">
+            <p class="m-0">Copyright ©2026 Productos para tu mejor amigo | Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
