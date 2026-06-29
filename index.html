@@ -1,222 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Productos para tu mejor amigo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetShop - Productos para tu mejor amigo</title>
 
-<style>
-body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#f4f6f8;
-}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-/* HEADER */
-header{
-    background:#27ae60;
-    color:white;
-    text-align:center;
-    padding:20px;
-}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
 
-/* NAV */
-nav{
-    background:#1e8449;
-    text-align:center;
-    padding:10px;
-}
-nav a{
-    color:white;
-    margin:10px;
-    text-decoration:none;
-    font-weight:bold;
-}
-
-/* SECCIONES */
-section{
-    padding:20px;
-}
-
-/* TARJETAS */
-.card{
-    background:white;
-    padding:15px;
-    margin:10px 0;
-    border-radius:10px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.1);
-}
-
-/* PRODUCTOS */
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
-    gap:15px;
-}
-
-.product{
-    background:white;
-    padding:10px;
-    border-radius:10px;
-    text-align:center;
-    box-shadow:0 2px 5px rgba(0,0,0,0.05);
-}
-
-.product img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
-
-/* FOOTER */
-footer{
-    background:#2c3e50;
-    color:white;
-    text-align:center;
-    padding:15px;
-    margin-top:20px;
-}
-
-/* IMAGEN GENERAL */
-img{
-    width:100%;
-    border-radius:10px;
-}
-
-/* CENTRAR EL VIDEO */
-.video-container {
-    text-align: center;
-    padding: 10px 0;
-}
-</style>
-
+        .header-custom {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+            url('https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&q=80&w=1500');
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
 
-<header>
-    <h1>🐶 Productos para tu Mejor Amigo 🐱</h1>
-    <p>Todo lo que tu mascota necesita en un solo lugar 💚</p>
+<header class="header-custom">
+    <h1>🐶 PetShop</h1>
+    <p>Productos para tu mejor amigo</p>
 </header>
 
-<nav>
-    <a href="#inicio">Inicio</a>
-    <a href="#nosotros">Quiénes Somos</a>
-    <a href="#productos">Productos</a>
-    <a href="#ubicacion">Ubicación</a>
-    <a href="#contacto">Contacto</a>
-</nav>
+<div class="container my-5">
 
-<main>
+    <h2 class="text-success">Registro de productos</h2>
 
-<section id="inicio">
-    <h2>🏠 Inicio</h2>
-    <div class="card">
-        Bienvenido a nuestra tienda de mascotas. Aquí encontrarás productos de calidad para perros, gatos y más 🐾
-    </div>
-</section>
+    <form id="formProducto" class="card p-3 shadow-sm">
+        <input id="nombre" class="form-control mb-2" placeholder="Nombre del producto">
+        <input id="descripcion" class="form-control mb-2" placeholder="Descripción">
 
-<section id="nosotros">
-    <h2>🐾 Quiénes Somos</h2>
+        <select id="categoria" class="form-control mb-2">
+            <option value="">Seleccione categoría</option>
+            <option>Alimento</option>
+            <option>Juguetes</option>
+            <option>Higiene</option>
+            <option>Snacks</option>
+        </select>
 
-    <div class="card">
-        Somos una tienda especializada en productos para mascotas. Nos dedicamos a ofrecer alimentos, juguetes,
-        accesorios y productos de higiene para mejorar la vida de los animales. Nuestro objetivo es brindar calidad,
-        confianza y amor por las mascotas, ya que las consideramos parte de la familia.
-    </div>
+        <button class="btn btn-success">Agregar producto</button>
+    </form>
 
-    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=1200&h=500" alt="mascotas">
-</section>
+    <h4 class="mt-4">Total productos: <span id="contador">0</span></h4>
 
-<section id="productos">
-    <h2>🦴 Productos</h2>
+    <div id="listaProductos" class="row mt-3"></div>
 
-    <div class="grid">
+</div>
 
-        <div class="product">
-            <img src="https://cdn.shopify.com/s/files/1/0102/3742/files/Ganador_936ee4de-362b-4b41-894f-0fbad4ba9e04.jpg?v=1611158640" alt="Alimento">
-            <div>🍖 Alimento premium</div>
-        </div>
-        <div class="product">
-            <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&q=80&w=400&h=300" alt="Juguetes">
-            <div>🎾 Juguetes interactivos</div>
-        </div>
-        <div class="product">
-            <img src="https://wedogy.com/wp-content/uploads/2025/04/dog-bed-brands-uk.webp" alt="Camas">
-            <div>🛏️ Camas cómodas</div>
-        </div>
-        <div class="product">
-            <img src="https://http2.mlstatic.com/D_Q_NP_2X_684768-MLA110080010917_042026-P.webp" alt="Collares">
-            <div>🐕 Collares y correas</div>
-        </div>
-        <div class="product">
-            <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80&w=400&h=300" alt="Higiene">
-            <div>🧼 Higiene y limpieza</div>
-        </div>
-        <div class="product">
-            <img src="https://i0.wp.com/snackys.cl/wp-content/uploads/2023/06/image-1.png?fit=1080%2C600&ssl=1" alt="Snacks">
-            <div>🦴 Snacks saludables</div>
-        </div>
-
-    </div>
-</section>
-
-<section>
-    <h2>🎥 Video informativo</h2>
-
-    <div class="card video-container">
-        <iframe width="560" height="315" 
-            src="https://www.youtube.com/embed/wLg0yy0pSuc?si=khTbZGmiQQ3Fsibq" 
-            title="YouTube video player" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            referrerpolicy="strict-origin-when-cross-origin" 
-            allowfullscreen>
-        </iframe>
-    </div>
-</section>
-
-<section id="ubicacion">
-    <h2>📍 Ubicación</h2>
-
-    <div class="card">
-        Nos encontramos en Ecuador 🇪🇨<br>
-        Dirección: Centro de la ciudad, tienda PetShop
-    </div>
-
-    <iframe
-        src="https://maps.google.com/maps?q=Ecuador&t=&z=13&ie=UTF8&iwloc=&output=embed"
-        width="100%" height="300" style="border:0; border-radius:10px;" allowfullscreen>
-    </iframe>
-</section>
-
-<section id="contacto">
-    <h2>📞 Contacto</h2>
-
-    <div class="card">
-        📧 petshop@email.com <br>
-        📱 0999999999 <br>
-        📍 Ecuador <br><br>
-
-        Facebook | Instagram | WhatsApp
-    </div>
-</section>
-
-<aside>
-    <div class="card">
-        ⚡ Promoción: 2x1 en juguetes 🐶🐱<br>
-        🚚 Envíos a todo el país<br>
-        ⏰ Atención 24/7
-    </div>
-</aside>
-
-</main>
-
-<footer>
-    Copyright ©2026 Productos para tu mejor amigo | Todos los derechos reservados.
-</footer>
+<script src="script.js"></script>
 
 </body>
 </html>
