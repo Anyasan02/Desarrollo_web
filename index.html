@@ -21,7 +21,6 @@
             text-align: center;
         }
 
-        /* Corrección visual para los mensajes de error dinámicos de la Semana 6 */
         .invalid-feedback {
             display: none;
             color: #dc3545;
@@ -37,27 +36,38 @@
 
 <body>
 
+<!-- ======================================================================= -->
+<!-- BLOQUE PLANTILLA FLASK: PROXIMAMENTE SE CONVERTIRÁ EN 'header.html'    -->
+<!-- ======================================================================= -->
 <header class="header-custom">
     <h1>🐶 PetShop</h1>
     <p>Productos para tu mejor amigo</p>
 </header>
+<!-- ======================================================================= -->
 
+<!-- ======================================================================= -->
+<!-- BLOQUE PLANTILLA FLASK: ESTA SECCIÓN FORMALIZARÁ EL 'base.html' (MAIN)  -->
+<!-- ======================================================================= -->
 <div class="container my-5">
 
     <h2 class="text-success">Registro de productos</h2>
 
-    <form id="formProducto" class="card p-3 shadow-sm" novalidate>
+    <!-- Formulario con Validaciones de la Semana 6 -->
+    <form id="formProducto" class="card p-3 shadow-sm mb-4" novalidate>
         <div class="mb-2">
+            <label class="form-label fw-bold">Nombre del Producto</label>
             <input id="nombre" class="form-control" placeholder="Nombre del producto">
             <div class="invalid-feedback">El nombre debe tener al menos 3 caracteres.</div>
         </div>
         
         <div class="mb-2">
+            <label class="form-label fw-bold">Descripción</label>
             <input id="descripcion" class="form-control" placeholder="Descripción">
             <div class="invalid-feedback">La descripción debe tener al menos 10 caracteres.</div>
         </div>
 
         <div class="mb-2">
+            <label class="form-label fw-bold">Categoría</label>
             <select id="categoria" class="form-control">
                 <option value="">Seleccione categoría</option>
                 <option value="Alimento">Alimento</option>
@@ -68,14 +78,32 @@
             <div class="invalid-feedback">Por favor, seleccione una categoría.</div>
         </div>
 
-        <button class="btn btn-success">Agregar producto</button>
+        <button class="btn btn-success w-100 fw-bold">Agregar producto</button>
     </form>
 
-    <h4 class="mt-4">Total productos: <span id="contador">0</span></h4>
+    <h4 class="mt-4 d-flex justify-content-between">
+        <span>Catálogo de Productos Disponibles</span>
+        <span class="badge bg-success">Total: <span id="contador">0</span></span>
+    </h4>
 
-    <div id="listaProductos" class="row mt-3"></div>
+    <!-- ======================================================================= -->
+    <!-- CONTENIDO DINÁMICO: Renderizado desde Arreglos de JavaScript (Semana 7)  -->
+    <!-- ======================================================================= -->
+    <div id="listaProductos" class="row mt-3">
+        <!-- JS inyectará las tarjetas o el mensaje de alerta condicional aquí -->
+    </div>
+    <!-- ======================================================================= -->
 
 </div>
+<!-- ======================================================================= -->
+
+<!-- ======================================================================= -->
+<!-- BLOQUE PLANTILLA FLASK: PROXIMAMENTE SE CONVERTIRÁ EN 'footer.html'    -->
+<!-- ======================================================================= -->
+<footer class="bg-dark text-white text-center py-3 mt-5">
+    <p class="mb-0">© 2026 PetShop - Todos los derechos reservados</p>
+</footer>
+<!-- ======================================================================= -->
 
 <script src="script.js"></script>
 
