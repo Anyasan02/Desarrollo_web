@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+
+{% block title %}
+Inicio | Mundo Mascota
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- PORTADA -->
+
+<section class="hero text-center">
+
+<div class="container">
+
+<h1>
+🐾 Mundo Mascota
+</h1>
+
+<h2>
+Productos para el bienestar de tu mejor amigo
+</h2>
+
+<p>
+Alimentos, juguetes, accesorios e higiene para mascotas
+</p>
+
+</div>
+
+</section>
+
+
+
+
+<!-- BIENVENIDA -->
+
+<section class="container my-5">
+
+<div class="p-5 bg-white rounded-4 shadow-sm text-center">
+
+
+<h2 class="text-success fw-bold">
+🏠 Bienvenidos a Mundo Mascota
+</h2>
+
+
+<p class="fs-5">
+
+Somos una tienda especializada en productos para mascotas.
+Encontrarás alimentos, juguetes, accesorios y productos
+para el cuidado de perros, gatos y otros animales.
+
+</p>
+
+
+<a href="{{ url_for('productos') }}" 
+class="btn btn-success btn-lg">
+
+Ver productos
+
+</a>
+
+
+</div>
+
+</section>
+
+
+
+
+
+
+<!-- QUIENES SOMOS -->
+
+
+<section class="container my-5">
+
+
+<h2 class="text-success fw-bold">
+
+🐾 Quiénes Somos
+
+</h2>
+
+
+<div class="row align-items-center">
+
+
+
+<div class="col-md-6">
+
+
+<p class="fs-5">
+
+En Mundo Mascota buscamos brindar productos
+de calidad para que tus mascotas tengan una vida
+saludable, feliz y llena de amor.
+
+Nuestro compromiso es ofrecer alimentos,
+accesorios, juguetes y productos de cuidado
+para cada integrante de la familia.
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="col-md-6 text-center">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd"
+
+class="img-fluid rounded-4 shadow"
+
+alt="Varias mascotas">
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- VIDEO -->
+
+
+<section class="container my-5">
+
+
+<h2 class="text-success fw-bold">
+
+🎥 Conoce más sobre mascotas
+
+</h2>
+
+
+<div class="ratio ratio-16x9">
+
+
+<iframe
+
+src="https://www.youtube.com/embed/1YqZ5kR9yYk"
+
+allowfullscreen>
+
+</iframe>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- UBICACION -->
+
+
+<section class="container my-5">
+
+
+<h2 class="text-success fw-bold">
+
+📍 Nuestra ubicación
+
+</h2>
+
+
+<div class="ratio ratio-21x9">
+
+
+<iframe
+
+src="https://maps.google.com/maps?q=Quito%20Ecuador&t=&z=13&ie=UTF8&iwloc=&output=embed">
+
+</iframe>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+{% endblock %}

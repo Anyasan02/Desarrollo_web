@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Proveedores | Mundo Mascota
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<section class="container my-5">
+
+
+<h1 class="text-success fw-bold text-center mb-5">
+🚚 Proveedores
+</h1>
+
+
+
+<div class="row g-4">
+
+
+<div class="col-md-6">
+
+
+<div class="card shadow p-4 h-100">
+
+
+<h3 class="text-success">
+Registrar proveedor
+</h3>
+
+
+<form>
+
+
+<div class="mb-3">
+
+<label class="form-label fw-bold">
+Nombre del proveedor
+</label>
+
+<input 
+type="text"
+class="form-control"
+placeholder="Ejemplo: Alimentos Mascota S.A."
+>
+
+</div>
+
+
+
+<div class="mb-3">
+
+<label class="form-label fw-bold">
+Producto suministrado
+</label>
+
+
+<input 
+type="text"
+class="form-control"
+placeholder="Ejemplo: Alimento para perros"
+>
+
+
+</div>
+
+
+
+
+<div class="mb-3">
+
+<label class="form-label fw-bold">
+Teléfono
+</label>
+
+
+<input 
+type="text"
+class="form-control"
+placeholder="Número de contacto"
+>
+
+
+</div>
+
+
+
+
+<button class="btn btn-success">
+Guardar proveedor
+</button>
+
+
+</form>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="col-md-6">
+
+
+<div class="card shadow p-4">
+
+
+<h3 class="text-success">
+Proveedores actuales
+</h3>
+
+
+
+<div class="list-group mt-3">
+
+
+<div class="list-group-item">
+
+🐾 <b>Distribuidora Pet Ecuador</b>
+<br>
+Alimentos y snacks para mascotas
+
+</div>
+
+
+
+<div class="list-group-item">
+
+🦴 <b>Mundo Animal S.A.</b>
+<br>
+Juguetes y accesorios
+
+</div>
+
+
+
+
+<div class="list-group-item">
+
+🧼 <b>Pet Care Ecuador</b>
+<br>
+Productos de higiene
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+{% endblock %}

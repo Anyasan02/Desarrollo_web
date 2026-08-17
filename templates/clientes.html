@@ -1,0 +1,268 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Clientes | Mundo Mascota
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<section class="container my-5">
+
+
+<h1 class="text-success fw-bold text-center mb-5">
+👥 Registro de Clientes
+</h1>
+
+
+
+<div class="row justify-content-center">
+
+
+<div class="col-md-8">
+
+
+<div class="card shadow p-4">
+
+
+<h3 class="text-success mb-4">
+Datos del cliente
+</h3>
+
+
+
+<form id="formCliente">
+
+
+<div class="mb-3">
+
+<label class="form-label fw-bold">
+Nombre completo
+</label>
+
+<input 
+type="text"
+class="form-control"
+placeholder="Ingrese nombre del cliente"
+>
+
+</div>
+
+
+
+
+<div class="mb-3">
+
+<label class="form-label fw-bold">
+Correo electrónico
+</label>
+
+
+<input 
+type="email"
+class="form-control"
+placeholder="correo@ejemplo.com"
+>
+
+
+</div>
+
+
+
+
+<div class="mb-3">
+
+<label class="form-label fw-bold">
+Teléfono
+</label>
+
+
+<input 
+type="text"
+class="form-control"
+placeholder="Número de contacto"
+>
+
+
+</div>
+
+
+
+
+<div class="mb-3">
+
+<label class="form-label fw-bold">
+Mascota
+</label>
+
+
+<select class="form-select">
+
+
+<option>
+Seleccione mascota
+</option>
+
+
+<option>
+Perro
+</option>
+
+
+<option>
+Gato
+</option>
+
+
+<option>
+Ave
+</option>
+
+
+<option>
+Conejo
+</option>
+
+
+<option>
+Hamster
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+<button class="btn btn-success">
+
+Guardar cliente
+
+</button>
+
+
+
+</form>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<br>
+
+
+
+<div class="card shadow p-4 mt-5">
+
+
+<h3 class="text-success">
+Lista de clientes registrados
+</h3>
+
+
+
+<table class="table table-striped mt-3">
+
+
+<thead class="table-success">
+
+
+<tr>
+
+<th>
+Nombre
+</th>
+
+
+<th>
+Correo
+</th>
+
+
+<th>
+Mascota
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+<tbody>
+
+
+<tr>
+
+<td>
+María López
+</td>
+
+
+<td>
+maria@gmail.com
+</td>
+
+
+<td>
+Perro
+</td>
+
+
+</tr>
+
+
+
+<tr>
+
+<td>
+Carlos Pérez
+</td>
+
+
+<td>
+carlos@gmail.com
+</td>
+
+
+<td>
+Gato
+</td>
+
+
+</tr>
+
+
+
+</tbody>
+
+
+</table>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+{% endblock %}

@@ -1,0 +1,593 @@
+{% extends "base.html" %}
+
+{% block title %}
+Productos | Mundo Mascota
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="container my-5">
+
+<h1 class="text-success fw-bold text-center mb-5">
+🐾 Categorías de Productos
+</h1>
+
+
+
+<div class="row row-cols-1 row-cols-md-4 g-4">
+
+
+
+<!-- PERROS -->
+
+<div class="col">
+
+<div class="card h-100 shadow categoria">
+
+<img src="https://images.unsplash.com/photo-1558788353-f76d92427f16"
+class="card-img-top"
+alt="Perros">
+
+
+<div class="card-body text-center">
+
+<h5 class="fw-bold">
+🐶 Perros
+</h5>
+
+
+<button class="btn btn-outline-success"
+data-bs-toggle="collapse"
+data-bs-target="#perros">
+
+Ver productos
+
+</button>
+
+
+<div class="collapse mt-3" id="perros">
+
+<ul class="list-group">
+
+<li class="list-group-item">
+Croquetas premium
+</li>
+
+<li class="list-group-item">
+Collares
+</li>
+
+<li class="list-group-item">
+Juguetes
+</li>
+
+<li class="list-group-item">
+Camas para perros
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+
+<!-- GATOS -->
+
+
+<div class="col">
+
+<div class="card h-100 shadow categoria">
+
+
+<img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131"
+class="card-img-top"
+alt="Gatos">
+
+
+<div class="card-body text-center">
+
+
+<h5 class="fw-bold">
+🐱 Gatos
+</h5>
+
+
+<button class="btn btn-outline-success"
+data-bs-toggle="collapse"
+data-bs-target="#gatos">
+
+Ver productos
+
+</button>
+
+
+<div class="collapse mt-3" id="gatos">
+
+<ul class="list-group">
+
+<li class="list-group-item">
+Alimento para gatos
+</li>
+
+<li class="list-group-item">
+Rascadores
+</li>
+
+<li class="list-group-item">
+Arena sanitaria
+</li>
+
+<li class="list-group-item">
+Juguetes
+
+</li>
+
+</ul>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+
+
+
+<!-- AVES -->
+
+
+<div class="col">
+
+<div class="card h-100 shadow categoria">
+
+
+<img src="https://images.unsplash.com/photo-1552728089-57bdde30beb3"
+class="card-img-top"
+alt="Aves">
+
+
+<div class="card-body text-center">
+
+
+<h5 class="fw-bold">
+🦜 Aves
+</h5>
+
+
+<button class="btn btn-outline-success"
+data-bs-toggle="collapse"
+data-bs-target="#aves">
+
+Ver productos
+
+</button>
+
+
+
+<div class="collapse mt-3" id="aves">
+
+
+<ul class="list-group">
+
+
+<li class="list-group-item">
+Semillas para aves
+</li>
+
+
+<li class="list-group-item">
+Jaulas
+</li>
+
+
+<li class="list-group-item">
+Bebederos
+</li>
+
+
+<li class="list-group-item">
+Juguetes para aves
+</li>
+
+
+</ul>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+<!-- CONEJOS -->
+
+
+<div class="col">
+
+
+<div class="card h-100 shadow categoria">
+
+
+<img src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308"
+class="card-img-top"
+alt="Conejos">
+
+
+
+<div class="card-body text-center">
+
+
+<h5 class="fw-bold">
+🐰 Conejos
+</h5>
+
+
+
+<button class="btn btn-outline-success"
+data-bs-toggle="collapse"
+data-bs-target="#conejos">
+
+Ver productos
+
+</button>
+
+
+<div class="collapse mt-3" id="conejos">
+
+
+<ul class="list-group">
+
+
+<li class="list-group-item">
+Heno
+</li>
+
+
+<li class="list-group-item">
+Alimento especial
+</li>
+
+
+<li class="list-group-item">
+Jaulas
+</li>
+
+
+</ul>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- HAMSTER -->
+
+
+<div class="col">
+
+
+<div class="card h-100 shadow categoria">
+
+
+<img src="https://images.unsplash.com/photo-1425082661705-1834bfd09dca"
+class="card-img-top"
+alt="Hamster">
+
+
+<div class="card-body text-center">
+
+
+<h5 class="fw-bold">
+🐹 Hamster
+</h5>
+
+
+<button class="btn btn-outline-success"
+data-bs-toggle="collapse"
+data-bs-target="#hamster">
+
+Ver productos
+
+</button>
+
+
+<div class="collapse mt-3" id="hamster">
+
+
+<ul class="list-group">
+
+
+<li class="list-group-item">
+Jaulas pequeñas
+</li>
+
+
+<li class="list-group-item">
+Ruedas de ejercicio
+</li>
+
+
+<li class="list-group-item">
+Alimento
+</li>
+
+
+</ul>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- PECES -->
+
+
+<div class="col">
+
+
+<div class="card h-100 shadow categoria">
+
+
+<img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5"
+class="card-img-top"
+alt="Peces">
+
+
+<div class="card-body text-center">
+
+
+<h5 class="fw-bold">
+🐟 Peces
+</h5>
+
+
+<button class="btn btn-outline-success"
+data-bs-toggle="collapse"
+data-bs-target="#peces">
+
+Ver productos
+
+</button>
+
+
+
+<div class="collapse mt-3" id="peces">
+
+
+<ul class="list-group">
+
+
+<li class="list-group-item">
+Acuarios
+</li>
+
+
+<li class="list-group-item">
+Comida para peces
+</li>
+
+
+<li class="list-group-item">
+Filtros
+</li>
+
+
+</ul>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- ACCESORIOS -->
+
+
+<div class="col">
+
+
+<div class="card h-100 shadow categoria">
+
+
+<img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee"
+class="card-img-top"
+alt="Accesorios">
+
+
+<div class="card-body text-center">
+
+
+<h5 class="fw-bold">
+🎒 Accesorios
+</h5>
+
+
+<button class="btn btn-outline-success"
+data-bs-toggle="collapse"
+data-bs-target="#accesorios">
+
+Ver productos
+
+</button>
+
+
+<div class="collapse mt-3" id="accesorios">
+
+
+<ul class="list-group">
+
+
+<li class="list-group-item">
+Correas
+</li>
+
+
+<li class="list-group-item">
+Camas
+</li>
+
+
+<li class="list-group-item">
+Platos
+</li>
+
+
+</ul>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- FARMACIA -->
+
+
+<div class="col">
+
+
+<div class="card h-100 shadow categoria">
+
+
+<img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae"
+class="card-img-top"
+alt="Farmacia Veterinaria">
+
+
+<div class="card-body text-center">
+
+
+<h5 class="fw-bold">
+💊 Farmacia Veterinaria
+</h5>
+
+
+<button class="btn btn-outline-success"
+data-bs-toggle="collapse"
+data-bs-target="#farmacia">
+
+Ver productos
+
+</button>
+
+
+
+<div class="collapse mt-3" id="farmacia">
+
+
+<ul class="list-group">
+
+
+<li class="list-group-item">
+Vitaminas
+</li>
+
+
+<li class="list-group-item">
+Productos antipulgas
+</li>
+
+
+<li class="list-group-item">
+Cuidado animal
+</li>
+
+
+</ul>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+{% endblock %}

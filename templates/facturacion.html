@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Facturación | Mundo Mascota
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<section class="container my-5">
+
+
+<h1 class="text-success fw-bold text-center mb-5">
+🧾 Facturación
+</h1>
+
+
+
+<div class="row g-4">
+
+
+
+<div class="col-md-6">
+
+
+<div class="card shadow p-4">
+
+
+<h3 class="text-success mb-4">
+Nueva factura
+</h3>
+
+
+
+<form>
+
+
+
+<div class="mb-3">
+
+<label class="form-label fw-bold">
+Cliente
+</label>
+
+
+<input 
+type="text"
+class="form-control"
+placeholder="Nombre del cliente"
+>
+
+
+</div>
+
+
+
+
+<div class="mb-3">
+
+<label class="form-label fw-bold">
+Producto
+</label>
+
+
+<select class="form-select">
+
+
+<option>
+Seleccione producto
+</option>
+
+
+<option>
+Alimento premium
+</option>
+
+
+<option>
+Juguetes para mascotas
+</option>
+
+
+<option>
+Camas para mascotas
+</option>
+
+
+<option>
+Accesorios
+</option>
+
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+<div class="mb-3">
+
+<label class="form-label fw-bold">
+Cantidad
+</label>
+
+
+<input 
+type="number"
+class="form-control"
+placeholder="Cantidad"
+>
+
+
+</div>
+
+
+
+
+
+<div class="mb-3">
+
+<label class="form-label fw-bold">
+Total
+</label>
+
+
+<input 
+type="number"
+class="form-control"
+placeholder="$0.00"
+>
+
+
+</div>
+
+
+
+
+<button class="btn btn-success">
+
+Generar factura
+
+</button>
+
+
+
+</form>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="col-md-6">
+
+
+<div class="card shadow p-4">
+
+
+<h3 class="text-success">
+Facturas recientes
+</h3>
+
+
+
+
+<table class="table table-striped mt-3">
+
+
+<thead class="table-success">
+
+
+<tr>
+
+<th>
+Cliente
+</th>
+
+
+<th>
+Producto
+</th>
+
+
+<th>
+Total
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+<tbody>
+
+
+
+<tr>
+
+<td>
+Ana Gómez
+</td>
+
+
+<td>
+Alimento premium
+</td>
+
+
+<td>
+$25.00
+</td>
+
+
+</tr>
+
+
+
+
+<tr>
+
+<td>
+Luis Pérez
+</td>
+
+
+<td>
+Cama para mascota
+</td>
+
+
+<td>
+$40.00
+</td>
+
+
+</tr>
+
+
+
+
+</tbody>
+
+
+</table>
+
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+{% endblock %}
