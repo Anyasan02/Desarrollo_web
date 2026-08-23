@@ -203,53 +203,14 @@ Mascota
 
 </thead>
 
-
-
 <tbody>
-
-
-<tr>
-
-<td>
-María López
-</td>
-
-
-<td>
-maria@gmail.com
-</td>
-
-
-<td>
-Perro
-</td>
-
-
-</tr>
-
-
-
-<tr>
-
-<td>
-Carlos Pérez
-</td>
-
-
-<td>
-carlos@gmail.com
-</td>
-
-
-<td>
-Gato
-</td>
-
-
-</tr>
-
-
-
+  {% for cliente in clientes %}
+  <tr>
+    <td>{{ cliente.nombre }}</td>
+    <td>{{ cliente.correo }}</td>
+    <td>{{ cliente.mascota }}</td>
+  </tr>
+  {% endfor %}
 </tbody>
 
 

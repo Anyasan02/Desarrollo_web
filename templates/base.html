@@ -26,84 +26,11 @@
 <body>
 
 
-<!-- MENU -->
+<!-- NAVBAR COMPONENTE -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top">
-
-    <div class="container">
-
-        <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">
-            🐾 Mundo Mascota
-        </a>
+{% include "components/navbar.html" %}
 
 
-        <button class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#menu">
-
-        <span class="navbar-toggler-icon"></span>
-
-        </button>
-
-
-
-        <div class="collapse navbar-collapse" id="menu">
-
-            <ul class="navbar-nav ms-auto">
-
-
-                <li class="nav-item">
-                    <a class="nav-link text-white"
-                    href="{{ url_for('index') }}">
-                    Inicio
-                    </a>
-                </li>
-
-
-                <li class="nav-item">
-                    <a class="nav-link text-white"
-                    href="{{ url_for('productos') }}">
-                    Productos
-                    </a>
-                </li>
-
-
-                <li class="nav-item">
-                    <a class="nav-link text-white"
-                    href="{{ url_for('clientes') }}">
-                    Clientes
-                    </a>
-                </li>
-
-
-                <li class="nav-item">
-                    <a class="nav-link text-white"
-                    href="{{ url_for('proveedores') }}">
-                    Proveedores
-                    </a>
-                </li>
-
-
-                <li class="nav-item">
-                    <a class="nav-link text-white"
-                    href="{{ url_for('facturacion') }}">
-                    Facturación
-                    </a>
-                </li>
-
-
-            </ul>
-
-        </div>
-
-    </div>
-
-</nav>
-
-
-
-<!-- CONTENIDO DE CADA PAGINA -->
 
 <main>
 
@@ -115,30 +42,14 @@
 
 
 
-<!-- FOOTER -->
+<!-- FOOTER COMPONENTE -->
 
-<footer class="bg-success text-white text-center p-4 mt-5">
-
-    <h5>🐾 Mundo Mascota</h5>
-
-    <p>
-    Cuidamos a tus mascotas con amor y productos de calidad.
-    </p>
-
-    <small>
-    
-    </small>
-
-</footer>
+{% include "components/footer.html" %}
 
 
-
-<!-- Bootstrap JS -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-
-<!-- JavaScript propio -->
 
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
