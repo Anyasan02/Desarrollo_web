@@ -53,40 +53,48 @@ Agotado
 {% endfor %}
 </div>
 
-<!-- ================= NUEVA TABLA DE PERSISTENCIA REAL (SQLITE) ================= -->
+<!--================= NUEVA TABLA DE PERSISTENCIA REAL (MYSQL) =================-->
 <div class="card shadow p-4 mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="text-success m-0">Lista de Productos Registrados</h3>
-        <a href="{{ url_for('formulario_producto') }}" class="btn btn-success">➕ Registrar Otro Producto</a>
-    </div>
-    <div class="table-responsive">
-        <table class="table table-striped align-middle mt-2">
-            <thead class="table-success">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Categoría</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% if productos_db %}
-                    {% for prod in productos_db %}
-                    <tr>
-                        <td class="fw-bold">{{ prod.nombre }}</td>
-                        <td>{{ prod.descripcion }}</td>
-                        <td><span class="badge bg-success">{{ prod.categoria }}</span></td>
-                    </tr>
-                    {% endfor %}
-                {% else %}
-                    <tr>
-                        <td colspan="3" class="text-center text-muted py-3">No hay productos guardados localmente todavía.</td>
-                    </tr>
-                {% endif %}
-            </tbody>
-        </table>
-    </div>
+<div class="d-flex justify-content-between align-items-center mb-3">
+<h3 class="text-success m-0">Lista de Productos Registrados</h3>
+<a href="{{ url_for('formulario_producto') }}" class="btn btn-success">+ Registrar Otro Producto</a>
 </div>
-<!-- =========================================================================== -->
-
+<div class="table-responsive">
+<table class="table table-striped align-middle mt-2">
+<thead class="table-success">
+<tr>
+<th>Nombre</th>
+<th>Descripción</th>
+<th>Categoría</th>
+<th class="text-center">Acciones</th>
+</tr>
+</thead>
+<tbody>
+{% if productos_db %}
+{% for prod in productos_db %}
+<tr>
+<td class="fw-bold">{{ prod.nombre }}</td>
+<td>{{ prod.descripcion }}</td>
+<td><span class="badge bg-success">{{ prod.categoria }}</span></td>
+<td class="text-center">
+    <!-- Botón para Editar -->
+    <a href="{{ url_for('editar_producto', id_producto=prod.id_producto) }}" class="btn btn-warning btn-sm text-dark fw-bold" style="border-radius:20px;">Editar</a>
+    
+    <!-- Botón para Eliminar con confirmación visual -->
+    <form action="{{ url_for('eliminar_producto', id_producto=prod.id_producto) }}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto permanentemente?');">
+        <button type="submit" class="btn btn-danger btn-sm text-white fw-bold" style="border-radius:20px;">Eliminar</button>
+    </form>
+</td>
+</tr>
+{% endfor %}
+{% else %}
+<tr>
+<td colspan="4" class="text-center text-muted py-3">No hay productos guardados en MySQL todavía.</td>
+</tr>
+{% endif %}
+</tbody>
+</table>
+</div>
+</div>
 </section>
 {% endblock %}

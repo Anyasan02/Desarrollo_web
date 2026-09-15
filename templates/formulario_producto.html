@@ -1,21 +1,21 @@
 {% extends "base.html" %}
 {% block title %}
-Registrar Producto | Mundo Mascota
+{% if editando %}Editar Producto{% else %}Registrar Producto{% endif %} | Mundo Mascota
 {% endblock %}
 {% block content %}
 <section class="container my-5">
 <div class="row justify-content-center">
 <div class="col-md-8">
 <div class="card shadow p-4">
-<h3 class="text-success mb-4">Registrar Nuevo Producto</h3>
-<form method="POST" action="{{ url_for('formulario_producto') }}">
-{{ form.hidden_tag() }}
+<h3 class="text-success mb-4">{% if editando %}Editar Producto Existente{% else %}Registrar Nuevo Producto{% endif %}</h3>
+<form method="POST" action="{% if editando %}{{ url_for('editar_producto', id_producto=id_producto) }}{% else %}{{ url_for('formulario_producto') }}{% endif %}">
+{{ form.hidden_tag()}}
 <div class="mb-3">
 <label class="form-label fw-bold">{{ form.nombre.label.text }}</label>
 {{ form.nombre(class="form-control" + (" is-invalid" if form.nombre.errors else ""), placeholder="Nombre del producto") }}
 {% if form.nombre.errors %}
 <div class="invalid-feedback">
-  {% for error in form.nombre.errors %}{{ error }}{% endfor %}
+{% for error in form.nombre.errors %}{{ error }}{% endfor %}
 </div>
 {% endif %}
 </div>
@@ -24,23 +24,25 @@ Registrar Producto | Mundo Mascota
 {{ form.descripcion(class="form-control" + (" is-invalid" if form.descripcion.errors else ""), placeholder="Descripción del producto", rows="3") }}
 {% if form.descripcion.errors %}
 <div class="invalid-feedback">
-  {% for error in form.descripcion.errors %}{{ error }}{% endfor %}
+{% for error in form.descripcion.errors %}{{ error }}{% endfor %}
 </div>
 {% endif %}
 </div>
 <div class="mb-3">
 <label class="form-label fw-bold">{{ form.categoria.label.text }}</label>
-{{ form.categoria(class="form-select" + (" is-invalid" if form.categoria.errors else "")) }}
+{{ form.categoria (class="form-select" + (" is-invalid" if form.categoria.errors else "")) }}
 {% if form.categoria.errors %}
 <div class="invalid-feedback">
-  {% for error in form.categoria.errors %}{{ error }}{% endfor %}
+{% for error in form.categoria.errors %}{{ error }}{% endfor %}
 </div>
 {% endif %}
 </div>
-{{ form.submit(class="btn btn-success") }}
+<button type="submit" class="btn btn-success">{% if editando %}Guardar Cambios{% else %}Registrar Producto{% endif %}</button>
+<a href="{{ url_for('productos') }}" class="btn btn-secondary text-white ms-2" style="border-radius:20px;">Cancelar</a>
 </form>
 </div>
 </div>
 </div>
 </section>
 {% endblock %}
+
