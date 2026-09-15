@@ -1,184 +1,92 @@
 {% extends "base.html" %}
-
-
 {% block title %}
-Productos | Mundo Mascota
+Productos Mundo Mascota
 {% endblock %}
-
-
-
-
 {% block content %}
-
-
-
 <section class="container my-5">
-
-
 <h1 class="text-success fw-bold text-center mb-3">
-🐾 Categorías de Productos
+Categorías de Productos
 </h1>
-
-
 <h4 class="text-center text-muted mb-5">
 {{ titulo }}
 </h4>
-
-
-
-
-
 <div class="row row-cols-1 row-cols-md-4 g-4">
-
-
-
-
-
 {% for categoria in categorias %}
-
-
-
 <div class="col">
-
-
 <div class="card h-100 shadow categoria">
-
-
-
 <img src="{{ url_for('static', filename='img/' + categoria.imagen) }}"
 class="card-img-top"
 alt="{{ categoria.nombre|upper }}">
-
-
-
-
-
 <div class="card-body text-center">
-
-
-
 <h5 class="fw-bold text-success">
-
 {{ categoria.icono }}
-
 {{ categoria.nombre|upper }}
-
 </h5>
-
-
-
-
-
 <button class="btn btn-outline-success"
 data-bs-toggle="collapse"
 data-bs-target="#categoria{{ loop.index }}">
-
-
 Ver productos
-
-
 </button>
-
-
-
-
-
-
 <div class="collapse mt-3" id="categoria{{ loop.index }}">
-
-
-
 <ul class="list-group">
-
-
-
 {% for producto in categoria.productos %}
-
-
-
 <li class="list-group-item">
-
 {{ producto }}
-
 </li>
-
-
-
 {% endfor %}
-
-
-
 </ul>
-
-
-
 </div>
-
-
-
-
-
-
-
 <br>
-
-
-
-{% if categoria.stock > 0 %}
-
-
-
+{% if categoria.stock > 0%}
 <span class="badge bg-success">
-
 Disponible:
 {{ categoria.stock }}
-
 </span>
-
-
-
 {% else %}
-
-
-
 <span class="badge bg-danger">
-
 Agotado
-
 </span>
-
-
-
 {% endif %}
-
-
-
-
-
 </div>
-
-
 </div>
-
-
 </div>
-
-
-
-
 {% endfor %}
-
-
-
-
-
 </div>
 
-
+<!-- ================= NUEVA TABLA DE PERSISTENCIA REAL (SQLITE) ================= -->
+<div class="card shadow p-4 mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="text-success m-0">Lista de Productos Registrados</h3>
+        <a href="{{ url_for('formulario_producto') }}" class="btn btn-success">➕ Registrar Otro Producto</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped align-middle mt-2">
+            <thead class="table-success">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Categoría</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if productos_db %}
+                    {% for prod in productos_db %}
+                    <tr>
+                        <td class="fw-bold">{{ prod.nombre }}</td>
+                        <td>{{ prod.descripcion }}</td>
+                        <td><span class="badge bg-success">{{ prod.categoria }}</span></td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="3" class="text-center text-muted py-3">No hay productos guardados localmente todavía.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- =========================================================================== -->
 
 </section>
-
-
-
-
 {% endblock %}
