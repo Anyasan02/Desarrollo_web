@@ -1,280 +1,105 @@
 {% extends "base.html" %}
-
-
 {% block title %}
 Facturación | Mundo Mascota
 {% endblock %}
-
-
-
 {% block content %}
-
-
 <section class="container my-5">
-
-
 <h1 class="text-success fw-bold text-center mb-5">
-🧾 Facturación
+Facturación
 </h1>
-
-
-
 <div class="row g-4">
-
-
-
 <div class="col-md-6">
-
-
 <div class="card shadow p-4">
-
-
 <h3 class="text-success mb-4">
 Nueva factura
 </h3>
-
-
-
-<form>
-
-
-
+<form method="POST" action="{{ url_for('facturacion') }}">
+{{ form.hidden_tag() }}
 <div class="mb-3">
-
 <label class="form-label fw-bold">
-Cliente
+{{ form.cliente.label.text }}
 </label>
-
-
-<input 
-type="text"
-class="form-control"
-placeholder="Nombre del cliente"
->
-
-
+{{ form.cliente(class="form-control" + (" is-invalid" if form.cliente.errors else ""), placeholder="Nombre del cliente") }}
+{% if form.cliente.errors %}
+<div class="invalid-feedback">
+  {% for error in form.cliente.errors %}{{ error }}{% endfor %}
 </div>
-
-
-
-
+{% endif %}
+</div>
 <div class="mb-3">
-
 <label class="form-label fw-bold">
-Producto
+{{ form.producto.label.text }}
 </label>
-
-
-<select class="form-select">
-
-
-<option>
-Seleccione producto
-</option>
-
-
-<option>
-Alimento premium
-</option>
-
-
-<option>
-Juguetes para mascotas
-</option>
-
-
-<option>
-Camas para mascotas
-</option>
-
-
-<option>
-Accesorios
-</option>
-
-
-
-</select>
-
-
+{{ form.producto(class="form-select" + (" is-invalid" if form.producto.errors else "")) }}
+{% if form.producto.errors %}
+<div class="invalid-feedback">
+  {% for error in form.producto.errors %}{{ error }}{% endfor %}
 </div>
-
-
-
-
-
+{% endif %}
+</div>
 <div class="mb-3">
-
 <label class="form-label fw-bold">
-Cantidad
+{{ form.cantidad.label.text }}
 </label>
-
-
-<input 
-type="number"
-class="form-control"
-placeholder="Cantidad"
->
-
-
+{{ form.cantidad(class="form-control" + (" is-invalid" if form.cantidad.errors else ""), placeholder="Cantidad") }}
+{% if form.cantidad.errors %}
+<div class="invalid-feedback">
+  {% for error in form.cantidad.errors %}{{ error }}{% endfor %}
 </div>
-
-
-
-
-
+{% endif %}
+</div>
 <div class="mb-3">
-
 <label class="form-label fw-bold">
-Total
+{{ form.total.label.text }}
 </label>
-
-
-<input 
-type="number"
-class="form-control"
-placeholder="$0.00"
->
-
-
+{{ form.total(class="form-control" + (" is-invalid" if form.total.errors else ""), placeholder="0.00") }}
+{% if form.total.errors %}
+<div class="invalid-feedback">
+  {% for error in form.total.errors %}{{ error }}{% endfor %}
 </div>
-
-
-
-
-<button class="btn btn-success">
-
-Generar factura
-
-</button>
-
-
-
+{% endif %}
+</div>
+{{ form.submit(class="btn btn-success") }}
 </form>
-
-
-
 </div>
-
-
 </div>
-
-
-
-
-
 <div class="col-md-6">
-
-
 <div class="card shadow p-4">
-
-
 <h3 class="text-success">
 Facturas recientes
 </h3>
-
-
-
-
 <table class="table table-striped mt-3">
-
-
 <thead class="table-success">
-
-
 <tr>
-
 <th>
 Cliente
 </th>
-
-
 <th>
 Producto
 </th>
-
-
 <th>
 Total
 </th>
-
-
 </tr>
-
-
 </thead>
-
-
-
 <tbody>
-
-
-
+{% for factura in facturas %}
 <tr>
-
 <td>
-Ana Gómez
+{{ factura.cliente }}
 </td>
-
-
 <td>
-Alimento premium
+{{ factura.producto }}
 </td>
-
-
 <td>
-$25.00
+${{ factura.total }}
 </td>
-
-
 </tr>
-
-
-
-
-<tr>
-
-<td>
-Luis Pérez
-</td>
-
-
-<td>
-Cama para mascota
-</td>
-
-
-<td>
-$40.00
-</td>
-
-
-</tr>
-
-
-
-
+{% endfor %}
 </tbody>
-
-
 </table>
-
-
-
 </div>
-
-
 </div>
-
-
-
 </div>
-
-
-
 </section>
-
-
-
-
 {% endblock %}
