@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Panel de Control | Mundo Mascota{% endblock %}
+{% block content %}
+<section class="container my-5 text-center">
+    <div class="p-5 bg-white rounded-4 shadow-sm">
+        <h1 class="text-success fw-bold mb-3">¡Bienvenido, {{ current_user.usuario }}!</h1>
+        <p class="fs-5 text-muted">Has iniciado sesión correctamente en el sistema administrativo de Mundo Mascota.</p>
+        <hr class="my-4">
+        <p>Desde aquí puedes gestionar las secciones privadas protegidas de la aplicación:</p>
+        <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+            <a href="{{ url_for('productos') }}" class="btn btn-success px-4">Gestionar Productos</a>
+            <a href="{{ url_for('clientes') }}" class="btn btn-success px-4">Gestionar Clientes</a>
+            <a href="{{ url_for('proveedores') }}" class="btn btn-success px-4">Gestionar Proveedores</a>
+            <a href="{{ url_for('facturacion') }}" class="btn btn-success px-4">Facturación</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

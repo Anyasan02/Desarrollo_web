@@ -2,6 +2,13 @@
 CREATE DATABASE IF NOT EXISTS mundo_mascota;
 USE mundo_mascota;
 
+-- Tabla de Usuarios para Autenticación
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
 -- Tabla de Proveedores
 CREATE TABLE IF NOT EXISTS proveedores (
     id_proveedor INT AUTO_INCREMENT PRIMARY KEY,

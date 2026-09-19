@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Login | Mundo Mascota{% endblock %}
+{% block content %}
+<section class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow p-4">
+                <h3 class="text-success mb-4 text-center">Acceso al Sistema</h3>
+                
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <form method="POST" action="{{ url_for('login') }}">
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">{{ form.usuario.label.text }}</label>
+                        {{ form.usuario(class="form-control" + (" is-invalid" if form.usuario.errors else ""), placeholder="Ingresa tu usuario") }}
+                        {% if form.usuario.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.usuario.errors %}{{ error }}{% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">{{ form.password.label.text }}</label>
+                        {{ form.password(class="form-control" + (" is-invalid" if form.password.errors else ""), placeholder="Ingresa tu contraseña") }}
+                        {% if form.password.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}{{ error }}{% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="d-grid gap-2">
+                        {{ form.submit(class="btn btn-success") }}
+                    </div>
+                    <p class="text-center mt-3 mb-0">¿No tienes una cuenta? <a href="{{ url_for('registro') }}" class="text-success fw-bold">Regístrate aquí</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
