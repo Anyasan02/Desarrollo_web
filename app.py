@@ -247,3 +247,13 @@ def proveedores():
 def facturacion():
     form = FacturacionForm()
     lista_facturas = [
+        {"cliente": "Ana Gómez", "producto": "Alimento premium", "total": "25.00"}
+    ]
+    if form.validate_on_submit():
+        nuevo = {"cliente": form.cliente.data, "producto": form.producto.data, "total": f"{form.total.data:.2f}"}
+        lista_facturas.append(nuevo)
+        return redirect(url_for('facturacion'))
+    return render_template("facturacion.html", facturas=lista_facturas, form=form)
+
+if __name__ == "__main__":
+    app.run(debug=True)
