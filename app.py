@@ -99,10 +99,28 @@ def login():
             return redirect(url_for('productos'))
     return render_template('login.html')
 
-@app.route('/productos')
+@app.route('/productos', methods=['GET', 'POST'])
 @login_required
 def productos():
-    return render_template('productos.html')
+    conn = obtener_conexion()
+    cursor = conn.cursor()
+    
+    # Hacemos la consulta JOIN requerida  para enlazar productos y proveedores
+    cursor.execute("""
+        SELECT p.id_producto, p.nombre, p.descripcion, p.categoria, prov.nombre 
+        FROM productos p
+        LEFT JOIN proveedores prov ON p.id_proveedor = prov.id_proveedor
+    """)
+    productos_registrados = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    
+    lista_productos = [
+        {"id": p[0], "nombre": p[1], "descripcion": p[2], "categoria": p[3], "proveedor": p[4]} 
+        for p in productos_registrados
+    ]
+    return render_template('productos.html', productos=lista_productos)
+
 
 @app.route('/clientes', methods=['GET', 'POST'])
 @login_required
