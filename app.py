@@ -6,6 +6,13 @@ from wtforms.validators import DataRequired, Email
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import psycopg2
 
+# Importamos tus formularios reales del proyecto de forma correcta
+from forms.cliente_form import ClienteForm
+from forms.facturacion_form import FacturacionForm
+from forms.producto_form import ProductoForm
+from forms.proveedor_form import ProveedorForm
+from forms.usuario_form import RegistroForm, LoginForm
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mi_clave_secreta_super_segura_123'
 
@@ -14,7 +21,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-# URL Externa de la Base de Datos de Render
+# URL Externa de la Base de Datos de Render protegida contra autocompletado
 servidor_db = "dpg-dassc617lnhs73ak44bg-a" + ".ohio-postgres" + ".render.com"
 DATABASE_URL = f"postgresql://mundo_mascota_db_user:NwMjdKgygjMZNLwFUhyqdwEJSiywa1Vr@{servidor_db}/mundo_mascota_db"
 
@@ -38,27 +45,6 @@ def load_user(user_id):
         return Usuario(user[0], user[1])
     return None
 
-# --- FORMULARIOS ---
-class ClienteForm(FlaskForm):
-    nombre = StringField('Nombre Completo', validators=[DataRequired()])
-    correo = StringField('Correo electrónico', validators=[DataRequired()])
-    telefono = StringField('Teléfono', validators=[DataRequired()])
-    mascota = SelectField('Mascota', choices=[('Perro', 'Perro'), ('Gato', 'Gato'), ('Ave', 'Ave'), ('Conejo', 'Conejo')], validators=[DataRequired()])
-    submit = SubmitField('Guardar cliente')
-
-class ProveedorForm(FlaskForm):
-    nombre = StringField('Nombre del proveedor', validators=[DataRequired()])
-    producto = StringField('Producto suministrado', validators=[DataRequired()])
-    telefono = StringField('Teléfono', validators=[DataRequired()])
-    submit = SubmitField('Guardar proveedor')
-
-class FacturacionForm(FlaskForm):
-    cliente = StringField('Cliente', validators=[DataRequired()])
-    producto = StringField('Producto', validators=[DataRequired()])
-    cantidad = IntegerField('Cantidad', validators=[DataRequired()])
-    total = DecimalField('Total', validators=[DataRequired()])
-    submit = SubmitField('Generar factura')
-
 # --- RUTAS DE LA APLICACIÓN ---
 @app.route('/')
 def index():
@@ -66,9 +52,10 @@ def index():
 
 @app.route('/registro', methods=['GET', 'POST'])
 def registro():
-    if request.method == 'POST':
-        usuario = request.form.get('usuario')
-        password = request.form.get('password')
+    form = RegistroForm()
+    if form.validate_on_submit():
+        usuario = form.usuario.data
+        password = form.password.data
         conn = obtener_conexion()
         cursor = conn.cursor()
         try:
@@ -80,13 +67,14 @@ def registro():
         finally:
             cursor.close()
             conn.close()
-    return render_template('registro.html')
+    return render_template('registro.html', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
-        usuario = request.form.get('usuario')
-        password = request.form.get('password')
+    form = LoginForm()
+    if form.validate_on_submit():
+        usuario = form.usuario.data
+        password = form.password.data
         conn = obtener_conexion()
         cursor = conn.cursor()
         cursor.execute("SELECT id, usuario FROM usuarios WHERE usuario = %s AND password = %s", (usuario, password))
@@ -97,15 +85,16 @@ def login():
             user_obj = Usuario(user[0], user[1])
             login_user(user_obj)
             return redirect(url_for('productos'))
-    return render_template('login.html')
+    return render_template('login.html', form=form)
 
 @app.route('/productos', methods=['GET', 'POST'])
 @login_required
 def productos():
+    form = ProductoForm()
     conn = obtener_conexion()
     cursor = conn.cursor()
     
-    # Hacemos la consulta JOIN requerida  para enlazar productos y proveedores
+    # Consulta JOIN corregida de forma estricta con id_proveedor
     cursor.execute("""
         SELECT p.id_producto, p.nombre, p.descripcion, p.categoria, prov.nombre 
         FROM productos p
@@ -119,8 +108,7 @@ def productos():
         {"id": p[0], "nombre": p[1], "descripcion": p[2], "categoria": p[3], "proveedor": p[4]} 
         for p in productos_registrados
     ]
-    return render_template('productos.html', productos=lista_productos)
-
+    return render_template('productos.html', form=form, productos=lista_productos)
 
 @app.route('/clientes', methods=['GET', 'POST'])
 @login_required
@@ -129,6 +117,7 @@ def clientes():
     conn = obtener_conexion()
     cursor = conn.cursor()
     
+    # Vinculado de forma exacta a form.correo.data de clienteform.py
     if form.validate_on_submit():
         cursor.execute("INSERT INTO clientes (nombre, correo, telefono, mascota) VALUES (%s, %s, %s, %s)",
                        (form.nombre.data, form.correo.data, form.telefono.data, form.mascota.data))
@@ -140,7 +129,6 @@ def clientes():
     cursor.close()
     conn.close()
     
-    # Formateamos los datos para la tabla HTML
     lista_clientes = [{"nombre": c[0], "correo": c[1], "mascota": c[2]} for c in clientes_registrados]
     return render_template('clientes.html', form=form, clientes=lista_clientes)
 
@@ -189,6 +177,7 @@ def facturacion():
 @app.route('/logout')
 @login_required
 def logout():
+    logout_user()
     return redirect(url_for('login'))
 
 if __name__ == "__main__":
