@@ -3,7 +3,7 @@ from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, IntegerField, DecimalField, PasswordField
 from wtforms.validators import DataRequired, Email
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_url, current_user
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import psycopg2
 
 app = Flask(__name__)
@@ -15,7 +15,8 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 # URL Externa de la Base de Datos de Render
-DATABASE_URL = "postgresql://mundo_mascota_db_user:NwMjdKgygjMZNLwFUhyqdwEJSiywa1Vr@://render.com"
+servidor_db = "dpg-dassc617lnhs73ak44bg-a" + ".ohio-postgres" + ".render.com"
+DATABASE_URL = f"postgresql://mundo_mascota_db_user:NwMjdKgygjMZNLwFUhyqdwEJSiywa1Vr@{servidor_db}/mundo_mascota_db"
 
 def obtener_conexion():
     return psycopg2.connect(DATABASE_URL)
