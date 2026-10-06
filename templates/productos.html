@@ -70,28 +70,29 @@ Agotado
 </tr>
 </thead>
 <tbody>
-{% if productos_db %}
-{% for prod in productos_db %}
-<tr>
-<td class="fw-bold">{{ prod.nombre }}</td>
-<td>{{ prod.descripcion }}</td>
-<td><span class="badge bg-success">{{ prod.categoria }}</span></td>
-<td class="text-center">
-    <!-- Botón para Editar -->
-    <a href="{{ url_for('editar_producto', id_producto=prod.id_producto) }}" class="btn btn-warning btn-sm text-dark fw-bold" style="border-radius:20px;">Editar</a>
-    
-    <!-- Botón para Eliminar con confirmación visual -->
-    <form action="{{ url_for('eliminar_producto', id_producto=prod.id_producto) }}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto permanentemente?');">
-        <button type="submit" class="btn btn-danger btn-sm text-white fw-bold" style="border-radius:20px;">Eliminar</button>
-    </form>
-</td>
-</tr>
-{% endfor %}
-{% else %}
-<tr>
-<td colspan="4" class="text-center text-muted py-3">No hay productos registrados en este momento.</td>
-</tr>
-{% endif %}
+          {% if productos %}
+            {% for prod in productos %}
+            <tr>
+              <td class="fw-bold">{{ prod.nombre }}</td>
+              <td>{{ prod.descripcion }}</td>
+              <td><span class="badge bg-success">{{ prod.categoria }}</span></td>
+              <td class="text-center">
+                <!-- Botón para Editar -->
+                <a href="{{ url_for('editar_producto', id_producto=prod.id) }}" class="btn btn-warning btn-sm text-dark fw-bold" style="border-radius:20px;">Editar</a>
+                
+                <!-- Botón para Eliminar con confirmación visual -->
+                <form action="{{ url_for('eliminar_producto', id_producto=prod.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto permanentemente?');">
+                  <button type="submit" class="btn btn-danger btn-sm text-white fw-bold" style="border-radius:20px;">Eliminar</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          {% else %}
+            <tr>
+              <td colspan="4" class="text-center text-muted py-3">No hay productos registrados en este momento.</td>
+            </tr>
+          {% endif %}
+
 </tbody>
 </table>
 </div>

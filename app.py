@@ -94,7 +94,7 @@ def productos():
     conn = obtener_conexion()
     cursor = conn.cursor()
     
-    # Consulta JOIN corregida de forma estricta con id_proveedor
+    # Consulta a la base de datos
     cursor.execute("""
         SELECT p.id_producto, p.nombre, p.descripcion, p.categoria, prov.nombre 
         FROM productos p
@@ -108,7 +108,27 @@ def productos():
         {"id": p[0], "nombre": p[1], "descripcion": p[2], "categoria": p[3], "proveedor": p[4]} 
         for p in productos_registrados
     ]
-    return render_template('productos.html', form=form, productos=lista_productos)
+    
+    # Lista de categorías requerida para renderizar las imágenes superiores
+    lista_categorias = [
+        {"nombre": "Perros", "icono": "🐶", "imagen": "PERROS.jpg", "stock": 10, "productos": []},
+        {"nombre": "Gatos", "icono": "🐱", "imagen": "GATOS.jpg", "stock": 5, "productos": []},
+        {"nombre": "Aves", "icono": "🦜", "imagen": "AVES.jpg", "stock": 8, "productos": []},
+        {"nombre": "Conejos", "icono": "🐰", "imagen": "CONEJOS.jpg", "stock": 4, "productos": []},
+        {"nombre": "Hamster", "icono": "🐹", "imagen": "HAMSTER.jpg", "stock": 12, "productos": []},
+        {"nombre": "Peces", "icono": "🐠", "imagen": "PECES.jpg", "stock": 0, "productos": []},
+        {"nombre": "Accesorios", "icono": "🦴", "imagen": "ACCESORIOS.jpg", "stock": 25, "productos": []},
+        {"nombre": "Farmacia", "icono": "🏥", "imagen": "FARMACIA VETERINARIA.jpg", "stock": 15, "productos": []}
+    ]
+    
+    # Clasificar dinámicamente los productos dentro de sus categorías correspondientes
+    for prod in lista_productos:
+        for cat in lista_categorias:
+            if prod["categoria"] and prod["categoria"].lower() in cat["nombre"].lower():
+                cat["productos"].append(prod["nombre"])
+
+    return render_template('productos.html', form=form, titulo="Listado General", categorias=lista_categorias, productos=lista_productos)
+
 
 @app.route('/clientes', methods=['GET', 'POST'])
 @login_required
