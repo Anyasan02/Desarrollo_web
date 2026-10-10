@@ -1,4 +1,7 @@
 import os
+from dotenv import load_dotenv
+load_dotenv()
+
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, IntegerField, DecimalField, PasswordField
@@ -21,11 +24,13 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-# URL Externa de la Base de Datos de Render protegida contra autocompletado
-servidor_db = "dpg-dassc617lnhs73ak44bg-a" + ".ohio-postgres" + ".render.com"
-DATABASE_URL = f"postgresql://mundo_mascota_db_user:NwMjdKgygjMZNLwFUhyqdwEJSiywa1Vr@{servidor_db}/mundo_mascota_db"
+# ================= CONEXIÓN A LA BASE DE DATOS =================
+DATABASE_URL = os.getenv("DATABASE_URL")
+print("DATABASE_URL encontrada:", DATABASE_URL)
 
 def obtener_conexion():
+    if not DATABASE_URL:
+        raise Exception("No se encontró DATABASE_URL en las variables de entorno.")
     return psycopg2.connect(DATABASE_URL)
 
 class Usuario(UserMixin):
@@ -37,12 +42,18 @@ class Usuario(UserMixin):
 def load_user(user_id):
     conn = obtener_conexion()
     cursor = conn.cursor()
-    cursor.execute("SELECT id, usuario FROM usuarios WHERE id = %s", (user_id,))
-    user = cursor.fetchone()
-    cursor.close()
-    conn.close()
-    if user:
-        return Usuario(user[0], user[1])
+    try:
+        # Buscamos al usuario por su ID numérica real
+        cursor.execute("SELECT id, usuario FROM usuarios WHERE id = %s", (int(user_id),))
+        user = cursor.fetchone()
+        if user:
+            # Retornamos el objeto Usuario pasando el ID como string y el nombre de usuario
+            return Usuario(str(user[0]), user[1])
+    except Exception as e:
+        print(f"Error al cargar usuario: {e}")
+    finally:
+        cursor.close()
+        conn.close()
     return None
 
 # --- RUTAS DE LA APLICACIÓN ---
@@ -62,8 +73,9 @@ def registro():
             cursor.execute("INSERT INTO usuarios (usuario, password) VALUES (%s, %s)", (usuario, password))
             conn.commit()
             return redirect(url_for('login'))
-        except:
-            return "El usuario ya existe."
+        except Exception as e:
+            print(f"Error en registro: {e}")
+            return "El usuario ya existe o hubo un problema con los datos."
         finally:
             cursor.close()
             conn.close()
@@ -81,10 +93,15 @@ def login():
         user = cursor.fetchone()
         cursor.close()
         conn.close()
+        
         if user:
-            user_obj = Usuario(user[0], user[1])
+            # Mandamos el ID convertido en string para cumplir con Flask-Login
+            user_obj = Usuario(str(user[0]), user[1])
             login_user(user_obj)
             return redirect(url_for('productos'))
+        else:
+            flash("Usuario o contraseña incorrectos", "error")
+            
     return render_template('login.html', form=form)
 
 @app.route('/productos', methods=['GET', 'POST'])
@@ -93,8 +110,6 @@ def productos():
     form = ProductoForm()
     conn = obtener_conexion()
     cursor = conn.cursor()
-    
-    # Consulta a la base de datos
     cursor.execute("""
         SELECT p.id_producto, p.nombre, p.descripcion, p.categoria, prov.nombre 
         FROM productos p
@@ -105,11 +120,16 @@ def productos():
     conn.close()
     
     lista_productos = [
-        {"id": p[0], "nombre": p[1], "descripcion": p[2], "categoria": p[3], "proveedor": p[4]} 
+        {
+            "id": p[0], 
+            "nombre": p[1], 
+            "descripcion": p[2], 
+            "categoria": p[3] if p[3] else "Sin Categoría", 
+            "proveedor": p[4] if p[4] else "Sin Proveedor"
+        } 
         for p in productos_registrados
     ]
     
-    # Lista de categorías requerida para renderizar las imágenes superiores
     lista_categorias = [
         {"nombre": "Perros", "icono": "🐶", "imagen": "PERROS.jpg", "stock": 10, "productos": []},
         {"nombre": "Gatos", "icono": "🐱", "imagen": "GATOS.jpg", "stock": 5, "productos": []},
@@ -121,14 +141,33 @@ def productos():
         {"nombre": "Farmacia", "icono": "🏥", "imagen": "FARMACIA VETERINARIA.jpg", "stock": 15, "productos": []}
     ]
     
-    # Clasificar dinámicamente los productos dentro de sus categorías correspondientes
     for prod in lista_productos:
         for cat in lista_categorias:
             if prod["categoria"] and prod["categoria"].lower() in cat["nombre"].lower():
                 cat["productos"].append(prod["nombre"])
-
+                
     return render_template('productos.html', form=form, titulo="Listado General", categorias=lista_categorias, productos=lista_productos)
 
+@app.route('/formulario_producto', methods=['GET', 'POST'])
+@login_required
+def formulario_producto():
+    form = ProductoForm()
+    if form.validate_on_submit():
+        conn = obtener_conexion()
+        cursor = conn.cursor()
+        try:
+            cursor.execute(
+                "INSERT INTO productos (nombre, descripcion, categoria) VALUES (%s, %s, %s)",
+                (form.nombre.data, form.descripcion.data, form.categoria.data)
+            )
+            conn.commit()
+            return redirect(url_for('productos'))
+        except Exception as e:
+            print(f"Error: {e}")
+        finally:
+            cursor.close()
+            conn.close()
+    return render_template('formulario_producto.html', form=form, editando=False)
 
 @app.route('/clientes', methods=['GET', 'POST'])
 @login_required
@@ -136,8 +175,6 @@ def clientes():
     form = ClienteForm()
     conn = obtener_conexion()
     cursor = conn.cursor()
-    
-    # Vinculado de forma exacta a form.correo.data de clienteform.py
     if form.validate_on_submit():
         cursor.execute("INSERT INTO clientes (nombre, correo, telefono, mascota) VALUES (%s, %s, %s, %s)",
                        (form.nombre.data, form.correo.data, form.telefono.data, form.mascota.data))
@@ -158,7 +195,6 @@ def proveedores():
     form = ProveedorForm()
     conn = obtener_conexion()
     cursor = conn.cursor()
-    
     if form.validate_on_submit():
         cursor.execute("INSERT INTO proveedores (nombre, producto, telefono) VALUES (%s, %s, %s)",
                        (form.nombre.data, form.producto.data, form.telefono.data))
@@ -179,7 +215,6 @@ def facturacion():
     form = FacturacionForm()
     conn = obtener_conexion()
     cursor = conn.cursor()
-    
     if form.validate_on_submit():
         cursor.execute("INSERT INTO facturas (cliente, producto, cantidad, total) VALUES (%s, %s, %s, %s)",
                        (form.cliente.data, form.producto.data, form.cantidad.data, form.total.data))
@@ -200,5 +235,5 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)
